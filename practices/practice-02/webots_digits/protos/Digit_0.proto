@@ -1,0 +1,50 @@
+#VRML_SIM R2025a utf8
+
+PROTO Digit_0 [
+  field SFVec3f    translation 0 0 0
+  field SFRotation rotation    0 0 1 0
+  field SFColor    color       0.5 0.5 0.5
+  field SFString   name        "digit_0"
+]
+{
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    children [
+      Transform {
+        translation 0 0.7 0.15
+        children [
+          Shape {
+            appearance DEF GRAY PBRAppearance {
+              baseColor IS color
+              roughness 1
+              metalness 0
+            }
+            geometry DEF HBAR Box { size 1.0 0.2 0.3 }
+          }
+        ]
+      }
+      Transform {
+        translation 0 -0.7 0.15
+        children [ Shape { appearance USE GRAY geometry USE HBAR } ]
+      }
+      Transform {
+        translation -0.4 0 0.15
+        children [ Shape { appearance USE GRAY geometry DEF VBAR Box { size 0.2 1.2 0.3 } } ]
+      }
+      Transform {
+        translation 0.4 0 0.15
+        children [ Shape { appearance USE GRAY geometry USE VBAR } ]
+      }
+    ]
+    boundingObject Group {
+      children [
+        Transform { translation 0 0.7 0.15  children [ USE HBAR ] }
+        Transform { translation 0 -0.7 0.15 children [ USE HBAR ] }
+        Transform { translation -0.4 0 0.15 children [ USE VBAR ] }
+        Transform { translation 0.4 0 0.15  children [ USE VBAR ] }
+      ]
+    }
+  }
+}
